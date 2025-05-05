@@ -32,7 +32,7 @@ int main ()
 	camera.rotation = 0.0f;
 	camera.zoom = 1;
 
-	Scene* scene = new TrigonometryScene("trigonometry", 1280, 720);
+	Scene* scene = new TrigonometryScene("Trigonometry", 1280, 720);
 	scene->Initialize();
 
 	// game loop
