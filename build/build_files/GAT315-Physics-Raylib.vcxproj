@@ -531,12 +531,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="..\..\src\polar.h" />
+    <ClInclude Include="..\..\src\polar_scene.h" />
     <ClInclude Include="..\..\src\scene.h" />
     <ClInclude Include="..\..\src\scene_camera.h" />
     <ClInclude Include="..\..\src\trigonometry_scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\polar_scene.cpp" />
     <ClCompile Include="..\..\src\scene.cpp" />
     <ClCompile Include="..\..\src\scene_camera.cpp" />
     <ClCompile Include="..\..\src\trigonometry_scene.cpp" />

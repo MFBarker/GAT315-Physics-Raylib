@@ -7,6 +7,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 */
 
+#include "polar_scene.h"
 #include "trigonometry_scene.h"
 #include "raylib.h"
 
@@ -32,7 +33,8 @@ int main ()
 	camera.rotation = 0.0f;
 	camera.zoom = 1;
 
-	Scene* scene = new TrigonometryScene("Trigonometry", 1280, 720);
+	//Scene* scene = new TrigonometryScene("Trigonometry", 1280, 720);
+	Scene* scene = new PolarScene("Polar Coordinates", 1280, 720);
 	scene->Initialize();
 
 	// game loop
