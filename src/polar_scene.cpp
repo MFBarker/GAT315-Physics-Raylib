@@ -8,6 +8,7 @@
 
 void PolarScene::Initialize()
 {
+	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
 }
 
 void PolarScene::Update()

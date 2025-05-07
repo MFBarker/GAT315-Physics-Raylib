@@ -8,7 +8,9 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 */
 
 #include "polar_scene.h"
+
 #include "trigonometry_scene.h"
+#include "vector_scene.h"
 #include "raylib.h"
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
@@ -34,7 +36,9 @@ int main ()
 	camera.zoom = 1;
 
 	//Scene* scene = new TrigonometryScene("Trigonometry", 1280, 720);
-	Scene* scene = new PolarScene("Polar Coordinates", 1280, 720);
+	Scene* scene = new VectorScene("Vector", 1280, 720);
+
+	//Scene* scene = new PolarScene("Polar Coordinates", 1280, 720);
 	scene->Initialize();
 
 	// game loop
