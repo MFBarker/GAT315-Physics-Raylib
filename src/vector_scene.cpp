@@ -1,25 +1,13 @@
 #include "vector_scene.h"
 #include "body.h"
 #include "raymath.h"
-
-float randomf()
-{
-	return rand()/ (float)RAND_MAX;
-}
+#include "math_utils.h"
 
 void VectorScene::Initialize()
 {
 	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
-	Body* body = new Body(Vector2{ 3, 0 }, Vector2{ 0, 0 }, 0.25f, WHITE);
-	m_head = body;
-	m_player = body;
-
-	for (int i = 0; i < 10; i++)
-	{
-		body->next = new Body(Vector2{ randomf() * 5, randomf() * 5}, Vector2{ 1, 0 }, 0.25f, RED);
-		body->next->prev = body;
-		body = body->next;
-	}
+	m_world = new World();
+	m_world->Initialize();
 
 }
 
@@ -27,31 +15,22 @@ void VectorScene::Update()
 {
 	float dt = GetFrameTime();
 
-	//player control
-	Vector2 input{ 0,0 };
-	if (IsKeyDown(KEY_A)) input.x = 1;
-	if (IsKeyDown(KEY_D)) input.x = -1;
-	if (IsKeyDown(KEY_W)) input.y = 1;
-	if (IsKeyDown(KEY_S)) input.y = -1;
-	input = Vector2Normalize(input);
-	m_player->velocity = input * 3;
+	float theta = randomf(0, 360);
 
-	//--
-	Body* body = m_head;
-	while (body)
+	if (IsMouseButtonDown(0)) 
 	{
-		if (body == m_player)
+		Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
+		for (int i = 0;i < 100; i++)
 		{
-			body = body->next;
+			Body* body = m_world->CreateBody(position, 0.2f, ColorFromHSV(randomf(360),1,1));
+			float offset = randomf(0, 360);
+			float x = cos(theta);
+			float y = sin(theta);
+			body->velocity = Vector2{ x,y } * randomf(1,6);
 		}
-
-		Vector2 direction = m_player->position - body->position;
-		direction = Vector2Normalize(direction) * 1;
-		body->velocity = direction;
-
-		body->Step(dt);
-		body = body->next;
 	}
+
+	m_world->Step(dt);
 }
 
 void VectorScene::Draw()
@@ -60,12 +39,7 @@ void VectorScene::Draw()
 	//
 	DrawGrid(10, 5, DARKGRAY);
 
-	Body* body = m_head;
-	while (body)
-	{
-		body->Draw(*this);
-		body = body->next;
-	}
+	m_world->Draw(*this);
 
 	//
 	m_camera->EndMode();

@@ -4,6 +4,7 @@
 void Body::Step(float dt)
 {
 	position += velocity * dt;
+	velocity *= 1.0f / (1.0f + damping * dt);
 }
 
 void Body::Draw(const Scene& scene)
