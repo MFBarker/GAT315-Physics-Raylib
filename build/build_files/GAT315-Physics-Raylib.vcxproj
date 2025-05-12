@@ -532,6 +532,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\src\body.h" />
+    <ClInclude Include="..\..\src\integrator.h" />
     <ClInclude Include="..\..\src\math_utils.h" />
     <ClInclude Include="..\..\src\polar.h" />
     <ClInclude Include="..\..\src\polar_scene.h" />

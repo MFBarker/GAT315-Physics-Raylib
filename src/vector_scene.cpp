@@ -27,10 +27,22 @@ void VectorScene::Update()
 			float x = cos(theta);
 			float y = sin(theta);
 			body->velocity = Vector2{ x,y } * randomf(1,6);
+			body->gravityScale = 0.2f;
 		}
 	}
-
+	//apply forces
 	m_world->Step(dt);
+	//applycollision
+	for (auto body : m_world->GetBodies())
+	{
+		if (body->position.y < -5)
+		{
+			body->position.y = -5;
+			body->velocity.y *= -1;
+		}
+
+		//honk
+	}
 }
 
 void VectorScene::Draw()
