@@ -17,16 +17,39 @@ void VectorScene::Update()
 
 	float theta = randomf(0, 360);
 
-	if (IsMouseButtonDown(0)) 
+	if (IsMouseButtonPressed(0)) 
 	{
+		int pattern = 0;
+
 		Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
-		for (int i = 0;i < 100; i++)
+
+		for (int i = 0; i < 100; i++)
 		{
-			Body* body = m_world->CreateBody(position, 0.2f, ColorFromHSV(randomf(360),1,1));
-			float offset = randomf(0, 360);
-			float x = cos(theta);
-			float y = sin(theta);
-			body->velocity = Vector2{ x,y } * randomf(1,6);
+			float angle = 0.0f;
+			float speed = randomf(2, 6);
+
+			switch (pattern)
+			{
+			case 0: // Circular explosion
+				angle = randomf(0, 360);
+				break;
+
+			case 1: // Directional burst
+				angle = theta * theta;
+				break;
+
+			case 2: // Spiral
+				angle = i * 7;
+				speed = 0.05f * i + 1.0f;
+				break;
+			}
+
+			float x = cosf(angle);
+			float y = sinf(angle);
+			Vector2 velocity = Vector2{ x, y } * speed;
+
+			Body* body = m_world->CreateBody(position, 0.2f, ColorFromHSV(randomf(360), 1, 1));
+			body->velocity = velocity;
 			body->gravityScale = 0.2f;
 		}
 	}
