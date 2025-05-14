@@ -2,6 +2,7 @@
 #include "body.h"
 #include "raymath.h"
 #include "math_utils.h"
+#include "raygui.h"
 
 void VectorScene::Initialize()
 {
@@ -48,24 +49,39 @@ void VectorScene::Update()
 			float y = sinf(angle);
 			Vector2 velocity = Vector2{ x, y } * speed;
 
-			Body* body = m_world->CreateBody(position, 0.2f, ColorFromHSV(randomf(360), 1, 1));
+			Body* body = m_world->CreateBody(position, 0.09f, ColorFromHSV(randomf(360), 1, 1));
 			body->velocity = velocity;
 			body->gravityScale = 0.2f;
+
+			body->restitution = randomf(0.5f, 1.0f);
 		}
 	}
 	//apply forces
-	m_world->Step(dt);
+	
 	//applycollision
 	for (auto body : m_world->GetBodies())
 	{
 		if (body->position.y < -5)
 		{
 			body->position.y = -5;
-			body->velocity.y *= -1;
+			body->velocity.y *= -body->restitution;
 		}
-
-		//honk
+		if (body->position.x < -9)
+		{
+			body->position.x = -9;
+			body->velocity.x *= -body->restitution;
+		}
+		if (body->position.x > 9)
+		{
+			body->position.x = 9;
+			body->velocity.x *= -body->restitution;
+		}
 	}
+}
+
+void VectorScene::FixedUpdate()
+{
+	m_world->Step(fixedTimeStep);
 }
 
 void VectorScene::Draw()
@@ -82,4 +98,9 @@ void VectorScene::Draw()
 
 void VectorScene::DrawGUI()
 {
+	if (WindowBox000Active)
+	{
+		WindowBox000Active = !GuiWindowBox(Rectangle{ anchor01.x + 0, anchor01.y + 0, 240, 576 }, "PhysicsWindowBox");
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 48, 120, 16 }, "GRAVITY", NULL, &World::gravity.y, -20, 20);
+	}
 }

@@ -27,8 +27,8 @@ public:
 	operator Vector2() const
 	{
 		Vector2 v;
-		v.x = cos(angle)* radius;
-		v.y = sin(angle)* radius;
+		v.x = (float)cos(angle)* radius;
+		v.y = (float)sin(angle)* radius;
 
 		return v;
 	}

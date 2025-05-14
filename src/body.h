@@ -54,6 +54,7 @@ public:
 	float invMass { 1 };
 
 	float gravityScale { 1 };
+	float restitution = 1;
 
 	float size = 1;
 	float damping = 0.1f;

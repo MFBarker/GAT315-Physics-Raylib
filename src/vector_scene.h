@@ -15,14 +15,14 @@ public:
 
 	// Inherited via Scene
 	void Initialize() override;
-
 	void Update() override;
-
+	void FixedUpdate() override;
 	void Draw() override;
-
 	void DrawGUI() override;
 
 private:
-	Body* m_head{ nullptr };
-	Body* m_player{ nullptr };
+	Vector2 anchor01 = { 24, 24 };
+
+	bool WindowBox000Active = true;
+	float Slider001Value = 0.0f;
 };

@@ -11,6 +11,10 @@ void TrigonometryScene::Update()
 	
 }
 
+void TrigonometryScene::FixedUpdate()
+{
+}
+
 //trig functions
 float DegToRad(float degrees) { return degrees * PI / 180; }
 float RadToDeg(float radians) { return radians * 180 /PI; }
