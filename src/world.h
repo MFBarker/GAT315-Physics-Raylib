@@ -20,6 +20,8 @@ public:
 
 	std::vector<Body*>& GetBodies() { return m_bodies; }
 
+	void UpdateBodies(float mass, float size, float damping, float gravityscale, int type);
+
 	static Vector2 gravity;
 
 private:

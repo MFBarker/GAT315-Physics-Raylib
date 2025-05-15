@@ -44,6 +44,8 @@ public:
 	void ApplyForce(const Vector2& force);
 	void ClearForce() { force = Vector2{ 0,0 }; }
 
+	Type IntToType(int val);
+
 public:
 	Vector2 position{0,0};
 	Vector2 velocity{0,0};

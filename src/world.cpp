@@ -48,3 +48,15 @@ void World::DestroyAll()
     m_bodies.clear();
 }
 
+void World::UpdateBodies(float mass, float size, float damping, float gravityscale, int type)
+{
+    for (auto body : m_bodies)
+    {
+        body->mass = mass;
+        body->size = size;
+        body->damping = damping;
+        body->gravityScale = gravityscale;
+        body->type = body->IntToType(type);
+    }
+}
+

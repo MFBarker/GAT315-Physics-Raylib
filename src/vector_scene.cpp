@@ -4,6 +4,7 @@
 #include "math_utils.h"
 #include "raygui.h"
 
+
 void VectorScene::Initialize()
 {
 	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
@@ -49,9 +50,9 @@ void VectorScene::Update()
 			float y = sinf(angle);
 			Vector2 velocity = Vector2{ x, y } * speed;
 
-			Body* body = m_world->CreateBody(position, 0.09f, ColorFromHSV(randomf(360), 1, 1));
+			Body* body = m_world->CreateBody(position, size, ColorFromHSV(randomf(360), 1, 1));
 			body->velocity = velocity;
-			body->gravityScale = 0.2f;
+			body->gravityScale = gravity_scale;
 
 			body->restitution = randomf(0.5f, 1.0f);
 		}
@@ -77,6 +78,7 @@ void VectorScene::Update()
 			body->velocity.x *= -body->restitution;
 		}
 	}
+	m_world->UpdateBodies(mass,size,damping,gravity_scale,type);
 }
 
 void VectorScene::FixedUpdate()
@@ -98,9 +100,16 @@ void VectorScene::Draw()
 
 void VectorScene::DrawGUI()
 {
-	if (WindowBox000Active)
+	if (PhysicsWindowActive)
 	{
-		WindowBox000Active = !GuiWindowBox(Rectangle{ anchor01.x + 0, anchor01.y + 0, 240, 576 }, "PhysicsWindowBox");
-		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 48, 120, 16 }, "GRAVITY", NULL, &World::gravity.y, -20, 20);
+		PhysicsWindowActive = !GuiWindowBox( Rectangle{ anchor01.x + 0, anchor01.y + 0, 240, 384 }, "PhysicsWindowBox");
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 48, 120, 16 }, "GRAVITY: ", NULL, &World::gravity.y, -20, 20);
+		GuiLabel( Rectangle{ anchor01.x + 8, anchor01.y + 88, 120, 24 }, "BODY CONTROLS:");
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 168, 120, 16 }, "MASS: ", NULL, &mass, 0, 1);
+		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 200, 120, 16 }, "SIZE: ", NULL, &size, 0.01f, 2);
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 232, 120, 16 }, "G-SCALE: ", NULL, &gravity_scale, 0.1f, 4);
+		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 264, 120, 16 }, "DAMPING: ", NULL, &damping, 0.1f, 5);
+		GuiLabel( Rectangle{ anchor01.x + 56, anchor01.y + 120, 120, 24 }, "TYPE:");
+		if (GuiDropdownBox( Rectangle{ anchor01.x + 96, anchor01.y + 120, 120, 24 }, "STATIC;KINEMATIC;DYNAMIC", & type, select_active)) select_active = !select_active;
 	}
 }

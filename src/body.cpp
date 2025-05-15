@@ -23,3 +23,13 @@ void Body::ApplyForce(const Vector2& force)
 {
 	this->force += force;
 }
+
+Body::Type Body::IntToType(int val)
+{
+	switch (val) {
+		case 0: return Type::Static;
+		case 1: return Type::Kinematic;
+		case 2: return Type::Dynamic;
+		default: return Type::Dynamic;
+	}
+}
