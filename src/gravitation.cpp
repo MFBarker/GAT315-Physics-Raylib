@@ -20,8 +20,7 @@ void ApplyGravitation(bodies_t& bodies, float strength)
             float distance = Vector2Length(direction);
 
             // STEP 3: Clamp the distance to a minimum value to avoid extreme forces
-            //distance = max(distance, 1);
-            //distance = Vector2Max(distance, Vector2{1,1});
+            //distance = std::min(distance, 1);
             
             // STEP 4: Calculate gravitational force magnitude using:
             // forceMagnitude = (bodyA mass * bodyB mass / (distance * distance)) * strength;

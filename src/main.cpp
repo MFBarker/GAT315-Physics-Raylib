@@ -8,9 +8,9 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 */
 
 #include "polar_scene.h"
-
 #include "trigonometry_scene.h"
 #include "vector_scene.h"
+#include "spring_scene.h"
 #include "raylib.h"
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
@@ -36,9 +36,9 @@ int main ()
 	camera.zoom = 1;
 
 	//Scene* scene = new TrigonometryScene("Trigonometry", 1280, 720);
-	Scene* scene = new VectorScene("Vector", 1280, 720);
-
 	//Scene* scene = new PolarScene("Polar Coordinates", 1280, 720);
+	//Scene* scene = new VectorScene("Vector", 1280, 720);
+	Scene* scene = new SpringScene("Spring", 1280, 720);
 	scene->Initialize();
 
 	SetTargetFPS(60); //defaults at 60 fps
@@ -48,7 +48,7 @@ int main ()
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		scene->Update();
-		timeAccum += GetFrameTime();
+		timeAccum += std::min(GetFrameTime(),0.5f);
 		while (timeAccum >= Scene::fixedTimeStep)
 		{
 			scene->FixedUpdate();

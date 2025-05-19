@@ -44,7 +44,15 @@ public:
 	void ApplyForce(const Vector2& force);
 	void ClearForce() { force = Vector2{ 0,0 }; }
 
-	Type IntToType(int val);
+	inline static Type IntToType(int val)
+	{
+		switch (val) {
+		case 0: return Type::Static;
+		case 1: return Type::Kinematic;
+		case 2: return Type::Dynamic;
+		default: return Type::Dynamic;
+		}
+	}
 
 public:
 	Vector2 position{0,0};
