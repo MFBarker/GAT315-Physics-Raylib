@@ -1,7 +1,6 @@
 #pragma once
 #include "raylib.h"
 #include "scene_camera.h"
-#include "world.h"
 #include <string>
 
 
@@ -41,5 +40,5 @@ protected:
 	Color m_background{ WHITE };
 
 	SceneCamera* m_camera{ nullptr };
-	World* m_world{nullptr};
+	class World* m_world{nullptr};
 };

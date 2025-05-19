@@ -1,9 +1,11 @@
 #include "vector_scene.h"
 #include "body.h"
+#include "gravitation.h"
+#include "world.h"
 #include "raymath.h"
-#include "math_utils.h"
 #include "raygui.h"
 
+#define GUI_DATA(data) TextFormat("%0.2f", data), &data
 
 void VectorScene::Initialize()
 {
@@ -54,7 +56,7 @@ void VectorScene::Update()
 			body->velocity = velocity;
 			body->gravityScale = gravity_scale;
 
-			body->restitution = randomf(0.5f, 1.0f);
+			body->restitution = restitution;
 		}
 	}
 	//apply forces
@@ -83,6 +85,8 @@ void VectorScene::Update()
 
 void VectorScene::FixedUpdate()
 {
+	ApplyGravitation(m_world->GetBodies(), 0.15f);
+
 	m_world->Step(fixedTimeStep);
 }
 
@@ -100,16 +104,22 @@ void VectorScene::Draw()
 
 void VectorScene::DrawGUI()
 {
+	//Prof Maple did this differently, so I will have to merge things together
+	if (select_active) GuiLock();
+
 	if (PhysicsWindowActive)
 	{
-		PhysicsWindowActive = !GuiWindowBox( Rectangle{ anchor01.x + 0, anchor01.y + 0, 240, 384 }, "PhysicsWindowBox");
-		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 48, 120, 16 }, "GRAVITY: ", NULL, &World::gravity.y, -20, 20);
+		PhysicsWindowActive = !GuiWindowBox( Rectangle{ anchor01.x + 0, anchor01.y + 0, 264, 384 }, "PhysicsWindowBox");
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 48, 120, 16 }, "GRAVITY: ", GUI_DATA(World::gravity.y), -20, 20);
 		GuiLabel( Rectangle{ anchor01.x + 8, anchor01.y + 88, 120, 24 }, "BODY CONTROLS:");
-		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 168, 120, 16 }, "MASS: ", NULL, &mass, 0, 1);
-		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 200, 120, 16 }, "SIZE: ", NULL, &size, 0.01f, 2);
-		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 232, 120, 16 }, "G-SCALE: ", NULL, &gravity_scale, 0.1f, 4);
-		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 264, 120, 16 }, "DAMPING: ", NULL, &damping, 0.1f, 5);
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 168, 120, 16 }, "MASS: ", GUI_DATA(mass), 0.1f, 10);
+		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 200, 120, 16 }, "SIZE: ", GUI_DATA(size), 0.02f, 5);
+		GuiSlider(Rectangle{ anchor01.x + 96, anchor01.y + 232, 120, 16 }, "G-SCALE: ", GUI_DATA(gravity_scale), 0, 5);
+		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 264, 120, 16 }, "DAMPING: ", GUI_DATA(damping), 0, 1);
+		GuiSlider( Rectangle{ anchor01.x + 96, anchor01.y + 296, 120, 16 }, "RESTITUTION: ", GUI_DATA(restitution), 0, 1);
 		GuiLabel( Rectangle{ anchor01.x + 56, anchor01.y + 120, 120, 24 }, "TYPE:");
 		if (GuiDropdownBox( Rectangle{ anchor01.x + 96, anchor01.y + 120, 120, 24 }, "STATIC;KINEMATIC;DYNAMIC", & type, select_active)) select_active = !select_active;
 	}
+
+	GuiUnlock();
 }

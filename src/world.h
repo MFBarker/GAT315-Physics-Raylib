@@ -1,9 +1,9 @@
 #pragma once
+#include "body.h"
 #include "raylib.h"
 #include <vector>
 
-struct Body;
-class Scene;
+using bodies_t = std::vector<Body*>;
 
 class World
 {
@@ -14,16 +14,16 @@ public:
 
 	Body* CreateBody(const Vector2& position, float size,const Color& color);
 	void Step(float timeStep);
-	void Draw(const Scene& scene);
+	void Draw(const class Scene& scene);
 
 	void DestroyAll();
 
-	std::vector<Body*>& GetBodies() { return m_bodies; }
+	bodies_t& GetBodies() { return m_bodies; }
 
 	void UpdateBodies(float mass, float size, float damping, float gravityscale, int type);
 
 	static Vector2 gravity;
 
 private:
-	std::vector<Body*> m_bodies;
+	bodies_t m_bodies;
 };
