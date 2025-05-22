@@ -12,13 +12,13 @@ public:
 	{}
 
 	Polar(const Vector2& v) :
-		angle{ (float)atan2(v.y, v.x) },
+		angle{ atan2f(v.y, v.x) },
 		radius{ sqrtf((v.x * v.x) + (v.y * v.y)) }
 	{}
 
 	Polar& operator = (const Vector2& v)
 	{
-		angle = atan2(v.y, v.x);
+		angle = atan2f(v.y, v.x);
 		radius = sqrtf((v.x * v.x) + (v.y * v.y));
 
 		return *this;

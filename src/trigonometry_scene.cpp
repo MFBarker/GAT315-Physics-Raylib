@@ -52,7 +52,7 @@ void TrigonometryScene::Draw()
 	}
 
 	// sin / cos
-	for (float x = -9.0f; x < 9.0f; x += 0.2)
+	for (float x = -9.0f; x < 9.0f; x += 0.2f)
 	{
 		float theta = time + ((x / 18.0f) * (2 * PI)); // 0 - 1
 		float c = cosf(theta) * radius;
@@ -67,7 +67,7 @@ void TrigonometryScene::Draw()
 	float y = sinf(theta) * radius;
 	DrawCircle(Vector2{ x,y }, 0.2f, YELLOW);
 
-	float angle = atan2(y, x); //atan (opposite, adjasent) = angle needed [very useful] [atan2 accounts for the 4 quandrants]
+	float angle = atan2f(y, x); //atan (opposite, adjasent) = angle needed [very useful] [atan2 accounts for the 4 quandrants]
 	//
 	m_camera->EndMode();
 }

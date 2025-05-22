@@ -43,7 +43,7 @@ void VectorScene::Update()
 				break;
 
 			case 2: // Spiral
-				angle = i * 7;
+				angle = i * 7.0f;
 				speed = 0.05f * i + 1.0f;
 				break;
 			}

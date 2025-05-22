@@ -93,7 +93,7 @@ void PolarScene::Draw()
 	for (int i = 1; i < steps; i++)
 	{
 		float theta = (i / (float)steps) * (6 * PI);
-		float r = a * sqrt(theta); 
+		float r = a * sqrtf(theta); 
 
 		Polar p{ theta + time, r };
 		DrawCircle(p, 0.2f, SKYBLUE);

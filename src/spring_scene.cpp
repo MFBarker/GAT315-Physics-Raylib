@@ -11,7 +11,6 @@ void SpringScene::Initialize()
 	m_camera = new SceneCamera(Vector2{ m_width / 2.0f, m_height / 2.0f });
 	m_world = new World();
 	m_world->Initialize();
-
 }
 
 void SpringScene::Update()
@@ -23,7 +22,7 @@ void SpringScene::Update()
 
 	if (IsKeyPressed(KEY_SPACE)) World::simulate = !World::simulate;
 
-	if (!GUI::mouseOverGUI && IsMouseButtonPressed(0)) 
+	if (!GUI::mouseOverGUI) 
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
@@ -35,6 +34,7 @@ void SpringScene::Update()
 			body->gravityScale = GUI::gravity_scale;
 			body->restitution = GUI::restitution;
 		}
+		//select body
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
 		{
 			Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
@@ -42,7 +42,7 @@ void SpringScene::Update()
 		}
 		if (m_selectedBody)
 		{
-			if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+			if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 			{
 				Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
 				m_connectBody = GUI::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
@@ -52,7 +52,7 @@ void SpringScene::Update()
 				if (m_selectedBody && m_connectBody)
 				{
 					float distance = Vector2Distance(m_selectedBody->position, m_connectBody->position);
-					m_world->CreateSpring(m_selectedBody, m_connectBody, distance, 20);
+					m_world->CreateSpring(m_selectedBody, m_connectBody, distance,GUI::stiffnessValue, GUI::springDampingValue);
 				}
 				m_selectedBody = nullptr;
 				m_connectBody = nullptr;

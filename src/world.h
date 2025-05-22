@@ -1,7 +1,7 @@
 #pragma once
+#include "raylib.h"
 #include "body.h"
 #include "spring.h"
-#include "raylib.h"
 #include <vector>
 
 using bodies_t = std::vector<Body*>;
@@ -25,7 +25,7 @@ public:
 	void UpdateBodies(float mass, float size, float damping, float gravityscale, int type);
 
 	//   SPRING
-	Spring* CreateSpring(struct Body* bodyA, struct Body* bodyB, float restLength, float stiffness);
+	Spring* CreateSpring(struct Body* bodyA, struct Body* bodyB, float restLength, float stiffness, float damping);
 
 	inline static Vector2 gravity{ 0,-9.81f };
 	inline static float gravitation = 0;
