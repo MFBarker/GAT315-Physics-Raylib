@@ -57,6 +57,9 @@
     <ClInclude Include="..\..\src\spring_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\spring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.cpp">
@@ -77,7 +80,6 @@
     <ClCompile Include="..\..\src\gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\gravitation.cpp" />
     <ClCompile Include="..\..\src\polar_scene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
@@ -89,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\vector_scene.cpp">
       <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\gravitation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\spring.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -40,9 +40,25 @@ void SpringScene::Update()
 			Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
 			m_selectedBody = GUI::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
 		}
-		
+		if (m_selectedBody)
+		{
+			if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+			{
+				Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
+				m_connectBody = GUI::GetBodyIntersect(position, m_world->GetBodies(), *m_camera);
+			}
+			else
+			{
+				if (m_selectedBody && m_connectBody)
+				{
+					float distance = Vector2Distance(m_selectedBody->position, m_connectBody->position);
+					m_world->CreateSpring(m_selectedBody, m_connectBody, distance, 20);
+				}
+				m_selectedBody = nullptr;
+				m_connectBody = nullptr;
+			}
+		}
 	}
-	//apply forces
 	//applycollision
 	for (auto body : m_world->GetBodies())
 	{
@@ -78,10 +94,18 @@ void SpringScene::Draw()
 	m_world->Draw(*this);
 	if (m_selectedBody)
 	{
-		//DrawCircleLine(m_world, size, YELLOW);
+		DrawCircleLine(m_selectedBody->position, m_selectedBody->size, YELLOW, 5);
+		if (m_connectBody)
+		{
+			DrawCircleLine(m_connectBody->position, m_connectBody->size, YELLOW, 5);
+			DrawLine(m_selectedBody->position, m_connectBody->position, 3, GREEN);
+		}
+		else
+		{
+			DrawLine(m_selectedBody->position, m_camera->ScreenToWorld(GetMousePosition()), 3, RED);
+		}
 	}
 
-	//
 	m_camera->EndMode();
 }
 

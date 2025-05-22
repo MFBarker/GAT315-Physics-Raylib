@@ -27,6 +27,7 @@ public:
 	static constexpr float fixedTimeStep = 1.0f / 60.0f; // 1/[desired fps]
 
 	friend struct Body;
+	friend struct Spring;
 
 protected:
 	void DrawGrid(float slices, float thickness, const Color& color) const;

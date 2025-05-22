@@ -14,7 +14,10 @@ public:
 	inline static bool mouseOverGUI = false;
 	inline static bool PhysicsWindowActive = true;
 
-	inline static Vector2 anchor01 = { 24, 72 };
+	inline static  Vector2 anchor01 = { 72, 48 };
+	inline static  Vector2 anchor02 = { 96, 96 };
+	inline static  Vector2 anchor03 = { 96, 288 };
+	inline static  Vector2 anchor04 = { 96, 384 };
 
 	//dynamic values
 	inline static float mass{ 1 };
@@ -24,6 +27,12 @@ public:
 	inline static float restitution{ 1 };
 	 
 	inline static int type = 2; //0 = static, 1 = kinematic, 2 = dynamic
-	 
+
+	inline static  float springDampingValue = 0.5f;
+	inline static  float stiffnessValue = 1.0f;
+	inline static  float gravitationValue = 0.0f;
+	inline static  float gravityValue = 0.0f;
+	inline static  bool simulateActive = true;
+
 	inline static bool select_active = false;
 };
