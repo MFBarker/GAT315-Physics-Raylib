@@ -24,7 +24,7 @@ void SpringScene::Update()
 
 	if (!GUI::mouseOverGUI) 
 	{
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsKeyDown(KEY_LEFT_CONTROL)))
 		{
 			Vector2 position = m_camera->ScreenToWorld(GetMousePosition());
 			Body::Type type = Body::IntToType(GUI::type);
@@ -33,6 +33,9 @@ void SpringScene::Update()
 
 			body->gravityScale = GUI::gravity_scale;
 			body->restitution = GUI::restitution;
+			body->damping = GUI::damping;
+
+			body->ApplyForce(randomOnUnitCircle() * 200);
 		}
 		//select body
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))

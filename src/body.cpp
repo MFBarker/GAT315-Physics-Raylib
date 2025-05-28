@@ -20,7 +20,19 @@ void Body::Draw(const Scene& scene)
 	scene.DrawCircle(position, size, color);
 }
 
-void Body::ApplyForce(const Vector2& force)
+void Body::ApplyForce(const Vector2& force, ForceMode forcemode)
 {
-	this->force += force;
+	switch (forcemode)
+	{
+	case Body::ForceMode::Force:
+		this->force += force;
+		break;
+	case Body::ForceMode::Impulse:
+		this->velocity += force * invMass;
+		break;
+	case Body::ForceMode::Velocity:
+		this->velocity += force;
+		break;
+	}
+	
 }

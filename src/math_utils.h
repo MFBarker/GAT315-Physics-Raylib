@@ -1,7 +1,7 @@
 #pragma once
-#include<cstdlib>
-#include<algorithm>
-
+#include <cstdlib>
+#include <algorithm>
+#include <raylib.h>
 
 
 inline float randomf()
@@ -19,3 +19,12 @@ inline float randomf(float min, float max)
 	if (min > max) std::swap(min, max);
 	return min + (randomf() * (max - min));
 }
+
+inline Vector2 randomOnUnitCircle()
+{
+	float theta = randomf(0, PI * 2);
+	return { cosf(theta), sinf(theta) };
+}
+
+//Fg = kx
+//L - RL

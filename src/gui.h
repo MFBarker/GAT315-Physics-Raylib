@@ -21,7 +21,7 @@ public:
 
 	//dynamic values
 	inline static float mass{ 1.0f };
-	inline static float size{ 0.1f };
+	inline static float size{ 0.8f };
 	inline static float damping{ 0.1f };
 	inline static float gravity_scale{ 1.0f };
 	inline static float restitution{ 1.0f };
