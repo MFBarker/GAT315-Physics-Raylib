@@ -22,7 +22,7 @@ public:
 	{}
 
 	void ApplyForce(float kMultiplier = 1);
-	//static void ApplyForce(const Vector2& position, struct Body& body, float restLength, float k, float damping);
+	static void ApplyForce(const Vector2& position, struct Body& body, float restLength, float k);
 
 	void Draw(const Scene& scene);
 };
