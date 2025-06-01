@@ -1,5 +1,6 @@
 #include "world.h"
 #include "gravitation.h"
+#include "collision.h"
 
 World::~World()
 {
@@ -51,6 +52,15 @@ void World::Step(float timeStep)
     {
         body->Step(timeStep);
         body->ClearForce();
+    }
+
+    // contact solver
+    for (int i = 0; i < 5; i++)
+    {
+        CreateContacts(m_bodies, m_contacts);
+        SeparateContacts(m_contacts);
+        //ResolveContacts(m_contacts);
+        m_contacts.clear();
     }
 }
 
