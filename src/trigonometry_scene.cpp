@@ -19,7 +19,7 @@ void TrigonometryScene::FixedUpdate()
 float DegToRad(float degrees) { return degrees * PI / 180; }
 float RadToDeg(float radians) { return radians * 180 /PI; }
 
-float Vector2Length(const Vector2& v) { return sqrtf((v.x * v.x) + (v.y * v.y)); }
+//float Vector2Length(const Vector2& v) { return sqrtf((v.x * v.x) + (v.y * v.y)); }
 
 //Normalization = vector/max value
 Vector2 Vector2normalize(const Vector2& v)
