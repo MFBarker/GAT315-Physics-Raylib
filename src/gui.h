@@ -15,9 +15,9 @@ public:
 	inline static bool PhysicsWindowActive = true;
 
 	inline static  Vector2 anchor01 = { 72, 48 };
-	inline static  Vector2 anchor02 = { 96, 96 };
-	inline static  Vector2 anchor03 = { 96, 288 };
-	inline static  Vector2 anchor04 = { 96, 384 };
+	inline static  Vector2 anchor02 = { 96, 88 };
+	inline static  Vector2 anchor03 = { 96, 280 };
+	inline static  Vector2 anchor04 = { 96, 376 };
 
 	//dynamic values
 	inline static float mass{ 1.0f };
@@ -36,4 +36,5 @@ public:
 
 	inline static bool simulateActive = true;
 	inline static bool select_active = false;
+	inline static bool resetPressed = false;
 };

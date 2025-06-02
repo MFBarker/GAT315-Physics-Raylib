@@ -118,6 +118,8 @@ void SpringScene::Update()
 			body->velocity.x *= -body->restitution; // multiple by -restituion to scale and flip velocity
 		}
 	}
+
+	if (GUI::resetPressed) m_world->DestroyAll();
 }
 
 void SpringScene::FixedUpdate()
