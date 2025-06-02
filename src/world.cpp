@@ -55,7 +55,7 @@ void World::Step(float timeStep)
     }
 
     // contact solver
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         CreateContacts(m_bodies, m_contacts);
         SeparateContacts(m_contacts);
