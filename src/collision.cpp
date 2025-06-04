@@ -18,7 +18,7 @@ void CreateContacts(const bodies_t& bodies, contacts_t& contacts)
 				contact.bodyA = bodyA;
 				contact.bodyB = bodyB;
 
-				Vector2 direction = Vector2Subtract(bodyB->position,bodyA->position); //<direction vector from bodyB to bodyA>
+				Vector2 direction = Vector2Subtract(bodyA->position,bodyB->position); //<direction vector from bodyB to bodyA>
 				float distanceSqr = Vector2LengthSqr(direction); //<get Vector2 Length Squared of direction>
 				if (distanceSqr <= EPSILON)
 				{

@@ -35,7 +35,7 @@ void SpringScene::Update()
 			body->restitution = GUI::restitution;
 			body->damping = GUI::damping;
 
-			body->ApplyForce(randomOnUnitCircle() * 200,Body::ForceMode::Impulse);
+			body->ApplyForce(randomOnUnitCircle() * 5,Body::ForceMode::Impulse);
 		}
 		//select body
 		if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
