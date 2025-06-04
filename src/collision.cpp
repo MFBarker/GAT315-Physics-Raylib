@@ -28,7 +28,7 @@ void CreateContacts(const bodies_t& bodies, contacts_t& contacts)
 
 				float distance = sqrtf(distanceSqr); //<get distance from squared distance>
 				float radius = bodyA->size + bodyB->size; //<add size of bodyA and bodyB>
-				contact.depth = ((bodyA->size * 0.5f) + (bodyB->size * 0.5f)) - distance; // <calculate penetration depth, see note above> //depth = (radiusA + radiusB) - distance
+				contact.depth = radius - distance; // <calculate penetration depth, see note above> //depth = (radiusA + radiusB) - distance
 				contact.normal = Vector2Normalize(direction); //<normalize direction, can use normalize function or direction / distance>
 				contact.restitution = (bodyA->restitution + bodyB->restitution) * 0.5f; //<get average restitution of both bodies> // *0.5 == /2
 
